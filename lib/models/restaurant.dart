@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
+
 import 'food.dart';
-class Restaurant{
-  List<Food> foodMenu = [
+class Restaurant extends ChangeNotifier{
+  final List<Food> _menu = [
     //biriyani
-    Food(
+   /* Food(
       name: "Authentic Chicken Dum Biriyani",
       description:
           "A traditional and aromatic biriyani made with long-grain basmati rice, succulent chicken, and a blend of rich spices, slow-cooked to perfection in the dum style.",
@@ -64,6 +66,7 @@ class Restaurant{
         Addon(name: "Extra Mutton Piece", price: 50),
       ],
     ),
+  */
     //chicken
   Food(
     name: "Alfam Chicken",
@@ -93,7 +96,7 @@ class Restaurant{
     name: "Chicken Korma",
     description:
         "A rich and creamy chicken curry, slow-cooked with yogurt, nuts, and aromatic spices, perfect with naan or rice.",
-    imagePath: "lib/images/chicken/chicken korma.png",
+    imagePath: "lib/images/chicken/Chicken Korma.jpeg",
     category: FoodCategory.chicken,
     price: 250,
     availableAddons: [
@@ -131,7 +134,7 @@ class Restaurant{
     name: "Banana Split Milkshake",
     description:
         "A creamy and delicious milkshake made with fresh bananas, vanilla ice cream, and chocolate syrup, topped with whipped cream and cherries.",
-    imagePath: "lib/images/dessert/Banana split milkshakes.png",
+    imagePath: "lib/images/dessert/Banana Split Milkshakes.jpeg",
     category: FoodCategory.desserts,
     price: 150,
     availableAddons: [
@@ -143,7 +146,7 @@ class Restaurant{
     name: "Chocolate Cake with Strawberry Filling",
     description:
         "A rich and moist chocolate cake layered with a luscious strawberry filling, topped with a glossy chocolate ganache.",
-    imagePath: "lib/images/dessert/Chocolate cake with Strawberry Filling.png",
+    imagePath: "lib/images/dessert/Chocolate Cake with Strawberry Filling.jpeg",
     category: FoodCategory.desserts,
     price: 280,
     availableAddons: [
@@ -155,7 +158,7 @@ class Restaurant{
     name: "Fruit Custard",
     description:
         "A refreshing and creamy dessert made with chilled custard and a mix of fresh seasonal fruits, lightly sweetened and flavorful.",
-    imagePath: "lib/images/dessert/Fruit Castard.png",
+    imagePath: "lib/images/dessert/Fruit Custard.jpeg",
     category: FoodCategory.desserts,
     price: 180,
     availableAddons: [
@@ -167,7 +170,7 @@ class Restaurant{
     name: "Gulab Jamun",
     description:
         "Soft and spongy deep-fried milk dumplings soaked in aromatic sugar syrup, served warm for a delightful treat.",
-    imagePath: "lib/images/dessert/Gulab Jamun.png",
+    imagePath: "lib/images/dessert/Gulab Jamun.jpeg",
     category: FoodCategory.desserts,
     price: 120,
     availableAddons: [
@@ -179,7 +182,7 @@ class Restaurant{
     name: "Orange Juice",
     description:
         "A fresh and revitalizing drink made with hand-squeezed oranges, packed with vitamin C and natural sweetness.",
-    imagePath: "lib/images/dessert/Orange juice.png",
+    imagePath: "lib/images/dessert/Orange juice.jpeg",
     category: FoodCategory.desserts,
     price: 100,
     availableAddons: [
@@ -255,7 +258,7 @@ class Restaurant{
     description:
         "Crispy cauliflower florets tossed in a spicy and tangy Indo-Chinese sauce, garnished with spring onions.",
     imagePath: "lib/images/vegOptions/gobi manchurian.jpeg",
-    category: FoodCategory.vegOptions,
+    category: FoodCategory.vegSpecials,
     price: 180,
     availableAddons: [
       Addon(name: "Extra Sauce", price: 20),
@@ -267,7 +270,7 @@ class Restaurant{
     description:
         "A simple yet flavorful North Indian dish made with potatoes sautéed in cumin seeds and spices, served hot.",
     imagePath: "lib/images/vegOptions/Jeera Aloo.jpeg",
-    category: FoodCategory.vegOptions,
+    category: FoodCategory.vegSpecials,
     price: 150,
     availableAddons: [
       Addon(name: "Extra Ghee", price: 20),
@@ -279,7 +282,7 @@ class Restaurant{
     description:
         "A crispy South Indian dosa filled with spiced potato masala, served with coconut chutney and sambar.",
     imagePath: "lib/images/vegOptions/masala dosa.jpeg",
-    category: FoodCategory.vegOptions,
+    category: FoodCategory.vegSpecials,
     price: 120,
     availableAddons: [
       Addon(name: "Extra Sambar", price: 15),
@@ -291,7 +294,7 @@ class Restaurant{
     description:
         "A rich and creamy North Indian curry made with paneer cubes in a buttery tomato-based gravy, infused with aromatic spices.",
     imagePath: "lib/images/vegOptions/Paneer Butter Masala.jpeg",
-    category: FoodCategory.vegOptions,
+    category: FoodCategory.vegSpecials,
     price: 220,
     availableAddons: [
       Addon(name: "Extra Butter", price: 25),
@@ -303,24 +306,32 @@ class Restaurant{
     description:
         "A popular Mumbai street food dish made with a spicy mashed vegetable curry served with butter-toasted pav (bread rolls).",
     imagePath: "lib/images/vegOptions/Pav Bhaji.jpeg",
-    category: FoodCategory.vegOptions,
+    category: FoodCategory.vegSpecials,
     price: 140,
     availableAddons: [
       Addon(name: "Extra Butter", price: 20),
       Addon(name: "Extra Pav", price: 15),
     ],
   ),
+  ];
   /* Getters
 
 
   */
+  List<Food> get menu =>_menu;
   /* operations
 
   */
+  //add to cart
+  //remove from cart
+  //get total price of cart
+  //get total number of items in cart
+  //clear cart
   /* Helpers
 
 
   */
+  //generate a receipt
 
-  ];
+  
 }

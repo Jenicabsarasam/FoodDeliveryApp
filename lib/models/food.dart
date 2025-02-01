@@ -18,11 +18,11 @@ class Food {
 }
 //food categories
 enum FoodCategory{
-  biriyani,
+ // biriyani,
   salads,
   chicken,
   desserts,
-  vegOptions,
+  vegSpecials,
 }
 //food addons
 class Addon{
