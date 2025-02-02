@@ -388,6 +388,9 @@ class Restaurant extends ChangeNotifier{
 
   */
   //generate a receipt
+  
+  //format double value into money
+  
 
   
 }
