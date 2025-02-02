@@ -144,7 +144,7 @@ class Restaurant extends ChangeNotifier{
     ],
   ),
   Food(
-    name: "Chocolate Cake with Strawberry Filling",
+    name: "Chocolate Cake",
     description:
         "A rich and moist chocolate cake layered with a luscious strawberry filling, topped with a glossy chocolate ganache.",
     imagePath: "lib/images/dessert/Chocolate Cake with Strawberry Filling.jpeg",
