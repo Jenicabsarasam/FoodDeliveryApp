@@ -325,18 +325,24 @@ class Restaurant extends ChangeNotifier{
   final List<CartItem> _cart=[];
   //add to cart
   void addToCart(Food food, List<Addon> selectedAddons) {
-  for (var item in _cart) {
-    if (item.food == food &&
-        ListEquality().equals(item.selectedAddons, selectedAddons)) {
-      item.quantity++;
-      notifyListeners();
-      return;
+    CartItem? cartItem=_cart.firstWhereOrNull((item){
+      bool isSameFood=item.food==food;
+      bool isSameAddons=
+        ListEquality().equals(item.selectedAddons, selectedAddons);
+      return isSameFood && isSameAddons;
+    });
+    if(cartItem!=null){
+      cartItem.quantity++;
     }
-  }
-
-  // If no match is found, add a new item
-  _cart.add(CartItem(food: food, selectedAddons: selectedAddons, quantity: 1));
-  notifyListeners();
+    else{
+      _cart.add(
+        CartItem(
+          food: food,
+          selectedAddons: selectedAddons,
+        ),
+      );
+    }
+   notifyListeners();
 }
 
   //remove from cart

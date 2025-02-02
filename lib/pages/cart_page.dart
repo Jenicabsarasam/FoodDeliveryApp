@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/components/my_button.dart';
+import 'package:food_delivery/components/my_cart_tile.dart';
 import 'package:food_delivery/models/restaurant.dart';
 import 'package:provider/provider.dart';
 
@@ -65,11 +66,11 @@ class CartPage extends StatelessWidget {
                         itemCount: userCart.length,
                         itemBuilder: (context, index) {
                           // get individual cart item
-                          final cartItem = userCart[index]; // Corrected variable name
+                          final cartItem = userCart[index]; 
                 
                           // return cart tile UI
-                          return ListTile(
-                            title: Text(cartItem.food.name), // Fixed usage
+                          return MyCartTile(
+                            cartItem:cartItem
                           );
                         },
                       ),

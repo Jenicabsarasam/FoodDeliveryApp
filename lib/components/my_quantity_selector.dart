@@ -49,7 +49,7 @@ class QuantitySelector extends StatelessWidget {
           ),
           //increase button
           GestureDetector(
-            onTap: onDecrement,
+            onTap: onIncrement,
             child: Icon(
               Icons.add,
               size: 20,
