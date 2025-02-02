@@ -10,7 +10,7 @@ A mobile application for ordering food from local restaurants, designed with Flu
 - **Cart Page**: Users can view selected items in their cart with prices and addons.
 - **Checkout Page**: A simple button to proceed to checkout.
 - **Cart Management**: Users can remove items from the cart or clear the entire cart.
-- 
+
 ## Installation
 
 ### Prerequisites
