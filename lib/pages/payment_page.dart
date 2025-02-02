@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:food_delivery/components/my_button.dart';
 import 'package:food_delivery/pages/delivery_progress_page.dart';
+
 class PaymentPage extends StatefulWidget {
   const PaymentPage({super.key});
 
@@ -10,19 +10,19 @@ class PaymentPage extends StatefulWidget {
 }
 
 class _PaymentPageState extends State<PaymentPage> {
-  GlobalKey<FormState> formKey=GlobalKey<FormState>();
-  String cardNumber='';
-  String expiryDate='';
-  String cardHolderName='';
-  String cvvCode='';
-  bool isCvvFocused=false;
-  //user wants to pay
-  void userTappedPay(){
-    if(formKey.currentState!.validate()){
-      //only show dialog if form is valid
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  String cardNumber = '';
+  String expiryDate = '';
+  String cardHolderName = '';
+  String cvvCode = '';
+
+  // user wants to pay
+  void userTappedPay() {
+    if (formKey.currentState!.validate()) {
+      // only show dialog if form is valid
       showDialog(
-        context: context, 
-        builder: (context)=>AlertDialog(
+        context: context,
+        builder: (context) => AlertDialog(
           title: const Text("Confirm payment"),
           content: SingleChildScrollView(
             child: ListBody(
@@ -35,30 +35,30 @@ class _PaymentPageState extends State<PaymentPage> {
             ),
           ),
           actions: [
-            //cancel button
+            // cancel button
             TextButton(
-              onPressed: ()=>Navigator.pop(context),
+              onPressed: () => Navigator.pop(context),
               child: const Text("Cancel"),
-              ),
-              //yes button
-              TextButton(
-                onPressed: (){
-                   Navigator.pop(context);
-                   Navigator.push(
-                    context, 
-                    MaterialPageRoute(
-                      builder: (context)=>DeliveryProgressPage(),
-                    ),
-                  );
-                },                 
-                child: const Text("Yes"),
-              ),
-
+            ),
+            // yes button
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DeliveryProgressPage(),
+                  ),
+                );
+              },
+              child: const Text("Yes"),
+            ),
           ],
         ),
       );
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,40 +67,104 @@ class _PaymentPageState extends State<PaymentPage> {
         backgroundColor: Colors.transparent,
         title: const Text("Checkout"),
       ),
-      body: Column(
-        children: [
-          //credit card
-          CreditCardWidget(
-            cardNumber: cardNumber, 
-            expiryDate: expiryDate,
-            cardHolderName: cardHolderName, 
-            cvvCode: cvvCode, 
-            showBackView: isCvvFocused,
-             onCreditCardWidgetChange: (p0){},
-            ),
-          //credit card form
-          CreditCardForm(
-            cardNumber: cardNumber, 
-            expiryDate: expiryDate,
-            cardHolderName: cardHolderName, 
-            cvvCode: cvvCode, 
-            onCreditCardModelChange: (data){
-              setState(() {
-                cardNumber=data.cardNumber;
-                expiryDate=data.expiryDate;
-                cardHolderName=data.cardHolderName;
-                cvvCode=data.cvvCode;
-              });
-             },
-             formKey: formKey,
-            ),
-            const Spacer(),
-            MyButton(
-              text: "Pay now",
-              onTap: userTappedPay,
-            ),
-            const SizedBox(height: 25),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          key: formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextFormField(
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  labelText: 'Card Number',
+                  hintText: 'Enter your card number',
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    cardNumber = value;
+                  });
+                },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a card number';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      keyboardType: TextInputType.datetime,
+                      decoration: const InputDecoration(
+                        labelText: 'Expiry Date',
+                        hintText: 'MM/YY',
+                      ),
+                      onChanged: (value) {
+                        setState(() {
+                          expiryDate = value;
+                        });
+                      },
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter expiry date';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: TextFormField(
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        labelText: 'CVV',
+                        hintText: 'Enter CVV',
+                      ),
+                      onChanged: (value) {
+                        setState(() {
+                          cvvCode = value;
+                        });
+                      },
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter CVV';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Cardholder Name',
+                  hintText: 'Enter cardholder name',
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    cardHolderName = value;
+                  });
+                },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter cardholder name';
+                  }
+                  return null;
+                },
+              ),
+              const Spacer(),
+              MyButton(
+                text: "Pay now",
+                onTap: userTappedPay,
+              ),
+              const SizedBox(height: 25),
+            ],
+          ),
+        ),
       ),
     );
   }
